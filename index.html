@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kartik Khurana</title>
+<meta name="description" content="Kartik Khurana — Physics and Data Science, IISER Pune. Gaussian Processes for paleoclimate, deep learning for monsoon forecasting.">
+<style>
+  body{
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 60px 24px 100px;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 17px;
+    line-height: 1.65;
+    color: #1a1a1a;
+    background: #fff;
+  }
+  a{ color: #14532d; text-decoration: underline; text-decoration-color: #c8d8c8; text-underline-offset: 2px; }
+  a:hover{ color: #0a3319; text-decoration-color: #14532d; }
+  h1{
+    font-size: 30px;
+    margin: 0 0 4px;
+    font-weight: normal;
+  }
+  .subtitle{
+    color: #555;
+    margin: 0 0 18px;
+    font-size: 16px;
+  }
+  .links{
+    margin: 0 0 30px;
+    font-size: 15px;
+    color: #555;
+  }
+  .links a{ margin-right: 16px; }
+  h2{
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 40px 0 14px;
+    font-weight: normal;
+    font-family: Georgia, serif;
+    color: #14532d;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 6px;
+  }
+  p{ margin: 0 0 12px; }
+  ul{ margin: 0 0 14px; padding-left: 22px; }
+  li{ margin-bottom: 6px; }
+  .entry{ margin-bottom: 22px; }
+  .entry:last-child{ margin-bottom: 0; }
+  .entry-title{ font-weight: bold; font-size: 17.5px; }
+  .entry-meta{
+    color: #666;
+    font-size: 14.5px;
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+  .skills-line{ margin-bottom: 8px; }
+  .skills-line b{ font-weight: bold; }
+  .lede{
+    font-size: 17.5px;
+    color: #333;
+    margin-bottom: 28px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid #ddd;
+  }
+  footer{
+    margin-top: 50px;
+    padding-top: 16px;
+    border-top: 1px solid #ccc;
+    font-size: 13px;
+    color: #888;
+  }
+</style>
+</head>
+<body>
+
+<h1>Kartik Khurana</h1>
+<p class="subtitle">BS&ndash;MS, Physics (Data Science specialization), IISER Pune</p>
+<p class="links">
+  <a href="mailto:kartik.khurana@students.iiserpune.ac.in">kartik.khurana@students.iiserpune.ac.in</a>
+  <a href="https://github.com/Kartik-0-0-9">github.com/Kartik-0-0-9</a>
+  Pune, India
+</p>
+
+<p class="lede">
+I'm a physics student at IISER Pune. I build machine learning models for climate data: Gaussian
+Processes for dating paleoclimate records like stalagmites, and deep learning for long-range
+monsoon forecasting. Both problems come down to the same thing: making good predictions from
+sparse, noisy data, and knowing how much to trust them.
+</p>
+
+<h2>Research</h2>
+
+<div class="entry">
+  <div class="entry-title">MS Thesis: Probabilistic Chronology Modeling for Paleoclimate Proxies</div>
+  <div class="entry-meta">Advisor: Prof. Bedartha Goswami, IISER Pune &middot; Jul 2026 &ndash; present</div>
+  <p>
+  Age&ndash;depth models for proxy records (e.g. stalagmites) are usually built first and treated as fixed
+  ground truth for everything downstream. That throws away real uncertainty in the radiometric dating
+  itself. I'm building a framework that instead propagates that chronological uncertainty directly into a
+  proxy-time Gaussian Process, so the age model and the climate signal are inferred jointly rather than
+  in sequence.
+  </p>
+  <ul>
+    <li>Hybrid deep learning scaling layer to cut the O(N&sup3;) cost of spatio-temporal GP inference, so sparse, irregularly-dated proxy records can be mapped onto continuous global grids.</li>
+    <li>Builds on and extends prior GP-scaling work (Axen et al.) for the specific structure of chronological uncertainty.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="entry-title">CAPE-Net: long-range monsoon forecasting</div>
+  <div class="entry-meta">DST Centre of Excellence, IIT Delhi &middot; Advisor: Dr. Saroj Kanta Mishra &middot; May &ndash; Jul 2026</div>
+  <p>
+  Decadal prediction of the Indian summer monsoon requires linking two very different kinds of data:
+  large multi-model climate simulation ensembles and comparatively sparse ocean observations. CAPE-Net
+  (Cross-Attention Predictive Ensemble Network) is a PyTorch architecture I built to align CMIP6
+  simulations with observed sea-surface temperature and ocean heat content through cross-attention,
+  producing a 10-year-lead forecast.
+  </p>
+  <ul>
+    <li>Out-of-distribution detector (Mahalanobis distance with Ledoit&ndash;Wolf shrinkage) that flags ocean initial conditions the model hasn't seen the like of, rather than letting it forecast blindly.</li>
+    <li>Checked the model wasn't just pattern-matching: gradient-based saliency maps confirm the learned latent features track known marine teleconnections.</li>
+    <li>Wrote the spatial preprocessing pipeline that feeds the model: EOF/PCA decomposition followed by Geopandas regionalization across six subcontinental climate zones.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="entry-title">Gaussian Processes for Paleoclimatological Age Modeling</div>
+  <div class="entry-meta">Advisor: Prof. Bedartha Goswami, IISER Pune &middot; Aug 2024 &ndash; Jul 2025</div>
+  <p>
+  The undergraduate project the MS thesis grew out of. Standard GP treatments of proxy dating assume the
+  measured signal and the radiometric time are conditionally independent given depth. That's convenient,
+  but not physically true. I formulated a joint GP over both quantities without that assumption, then
+  extended it with monotonicity constraints (via virtual derivative observations) to enforce the one
+  thing standard non-parametric GPs don't guarantee for free: that depth and time can't run backwards.
+  Validated against synthetic benchmark datasets built for the purpose.
+  </p>
+  <ul>
+    <li>Code: <a href="https://github.com/Kartik-0-0-9/Monotonization-of-Gaussian-Processes">github.com/Kartik-0-0-9/Monotonization-of-Gaussian-Processes</a></li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="entry-title">Computational modeling of C. elegans locomotion</div>
+  <div class="entry-meta">The Institute of Mathematical Sciences (IMSc), Chennai &middot; Advisor: Dr. Sitabhra Sinha &middot; May 2024</div>
+  <ul>
+    <li>Reproduced and built an alternative implementation of the Niebur model of neuromuscular locomotion, using Python, NumPy, and SciPy ODE solvers.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="entry-title">Computational methods in experimental particle physics</div>
+  <div class="entry-meta">IISER Pune &middot; Advisor: Prof. Seema Sharma &middot; Aug 2024</div>
+  <ul>
+    <li>12-week project on relativistic kinematics and high-energy collision data analysis, using C++, ROOT, and Pythia.</li>
+  </ul>
+</div>
+
+<h2>Schools &amp; research programs</h2>
+<ul>
+  <li><b>REYES Program</b>, UC Berkeley / Temple University (Jul 2024). Computational QCD with Dr. Martha Constantinou; implemented bootstrapping algorithms for hadron energy distributions.</li>
+  <li><b>Python4Physics</b>, UC Berkeley (Jul 2024). Scientific computing coursework in SciPy, NumPy, Matplotlib, Pandas.</li>
+  <li><b>SOKENDAI Asian Winter School</b>, Hayama, Japan (Feb 2024). Gravitational wave astronomy, high-energy instrumentation.</li>
+  <li><b>Multiscale Methods Summer School</b>, Gda&nacute;sk, Poland (Jul 2023). Quantum scattering theory and Monte Carlo methods; scored 50/60 on the final qualifying assessment.</li>
+  <li><b>Astronomy Bootcamp</b>, PMML, New Delhi (Jul 2024). Galactic astrophysics, radio astronomy, computational astrophysics labs using AstroPy.</li>
+</ul>
+
+<h2>Skills</h2>
+<p class="skills-line"><b>Programming:</b> Python (NumPy, SciPy, Pandas, Scikit-learn, PyTorch, Xarray, Geopandas), C++ (ROOT, Pythia)</p>
+<p class="skills-line"><b>Bayesian &amp; Gaussian Processes:</b> statistical inference, Bayesian modeling, uncertainty quantification, Monte Carlo methods, likelihood-based inference; GP regression, covariance kernels (RBF, Mat&eacute;rn, composite), monotonic GPs with virtual derivative observations, Expectation Propagation, Gauss&ndash;Hermite quadrature, predictive posterior inference</p>
+<p class="skills-line"><b>Deep learning:</b> CNNs, GNNs, autoencoders, Transformers, cross-attention, GANs, diffusion models, saliency-based explainability, anomaly/OOD detection</p>
+<p class="skills-line"><b>Mathematics:</b> linear algebra, probability theory, stochastic processes, graph theory, combinatorial optimization, computational number theory</p>
+<p class="skills-line"><b>Tools:</b> Git, LaTeX, SageMath, Linux, GPy, GPstuff, MATLAB</p>
+
+<h2>Leadership</h2>
+<p>General Coordinator, Aakashganga (Astronomy Club of IISER Pune), Sep 2023 to Oct 2024. Organized public telescope observation sessions and outreach events.</p>
+
+<h2>Achievements</h2>
+<ul>
+  <li>1st place, Hyperion (2024). National physics and computational cosmology competition run by the Astronomy Club of IIT Kanpur, 800+ participants.</li>
+  <li>Qualified the National Graduate Physics Examination (NGPE), IAPT (2023).</li>
+  <li>KVPY Fellowship, AIR 409 (2021). DST-funded national fellowship for research careers in basic sciences.</li>
+  <li>JEE 2022: 99.5 percentile in Physics.</li>
+</ul>
+
+<footer>
+  Last updated August 2026.
+</footer>
+
+</body>
+</html>
